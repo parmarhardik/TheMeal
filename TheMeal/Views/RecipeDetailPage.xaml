@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TheMeal.Views.RecipeDetailPage"
+             xmlns:viewmodels="clr-namespace:TheMeal.ViewModels"
+             xmlns:local="clr-namespace:TheMeal.Behavior"
+             Shell.NavBarIsVisible="True"
+             Shell.BackgroundColor="{StaticResource Primary}"
+             Title="Recipe Details">
+    <Shell.TitleView>
+        <StackLayout Orientation="Horizontal" VerticalOptions="Center" HorizontalOptions="FillAndExpand">
+            <ImageButton Source="back.png" HeightRequest="25" WidthRequest="25" Margin="0,0,10,0"
+                         Command="{Binding GoBackCommand}" HorizontalOptions="Start" />
+            <Label Text="Recipe Details" TextColor="White" FontSize="Medium" VerticalOptions="Center" />
+        </StackLayout>
+    </Shell.TitleView>
+    <ContentPage.Behaviors>
+        <local:InitializeViewModelBehavior />
+    </ContentPage.Behaviors>
+    
+        <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="20">
+            
+            <Frame Padding="0" IsClippedToBounds="True" CornerRadius="10" HasShadow="True">
+                <Image Source="{Binding Recipe.strMealThumb}" 
+                       Aspect="Fill"
+                       HeightRequest="250" />
+            </Frame>
+
+            <Label Text="{Binding Recipe.strMeal}" 
+                   FontSize="28" 
+                   FontAttributes="Bold"
+                   TextColor="Black" />
+
+            <Label Text="{Binding Recipe.strInstructions}" 
+                   FontSize="16"
+                   TextColor="Gray" />
+
+                <ActivityIndicator IsRunning="{Binding IsBusy}"
+                       IsVisible="{Binding IsBusy}"
+                       VerticalOptions="Center"
+                       HorizontalOptions="Center" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+    
+
+
+</ContentPage>

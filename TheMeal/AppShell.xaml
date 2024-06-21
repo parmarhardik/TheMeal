@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="TheMeal.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:TheMeal"
+    xmlns:views="clr-namespace:TheMeal.Views"
+    Shell.FlyoutBehavior="Disabled"
+    Title="The Meal">
+    <Shell.Resources>
+        <Style TargetType="Shell">
+            <Setter Property="Shell.BackgroundColor" Value="{StaticResource NavigationBarBackgroundColor}" />
+        </Style>
+    </Shell.Resources>
+    <ShellContent
+        Title="Home"
+        ContentTemplate="{DataTemplate local:MainPage}"
+        Route="MainPage" />
+        <ShellContent Title="Recipes" Route="recipelist" ContentTemplate="{DataTemplate views:RecipeListPage}" />
+        <ShellContent Title="Recipe Details" Route="recipedetail" ContentTemplate="{DataTemplate views:RecipeDetailPage}" />
+</Shell>
+

@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TheMeal.Views.RecipeListPage"
+             xmlns:viewmodels="clr-namespace:TheMeal.ViewModels"
+             xmlns:local="clr-namespace:TheMeal.Behavior"
+             Shell.NavBarIsVisible="True"
+             Shell.BackgroundColor="{StaticResource Primary}"
+             Title="Recipes">
+    <ContentPage.Behaviors>
+        <local:InitializeViewModelBehavior />
+    </ContentPage.Behaviors>
+         <Shell.TitleView>
+        <StackLayout Orientation="Horizontal" VerticalOptions="Center" HorizontalOptions="FillAndExpand">
+            <ImageButton Source="back.png" HeightRequest="{OnPlatform Default=12, iOS=12, Android=25}" WidthRequest="{OnPlatform Default=12, iOS=12, Android=25}" Margin="0,0,10,0"
+                         Command="{Binding GoBackCommand}" HorizontalOptions="Start" />
+            <Label Text="Recipes" TextColor="White" FontSize="Medium" VerticalOptions="Center" />
+        </StackLayout>
+    </Shell.TitleView>
+     <Grid>
+        <CollectionView ItemsSource="{Binding Recipes}" SelectionMode="None">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Grid Padding="10" ColumnSpacing="10" Margin="5" ColumnDefinitions="Auto,*" RowDefinitions="Auto,Auto">
+                        <Image Grid.RowSpan="2" Source="{Binding strMealThumb}" WidthRequest="80" HeightRequest="80" Aspect="AspectFill" />
+                        <Label Grid.Column="1" Text="{Binding strMeal}" FontSize="18" VerticalOptions="Center" />
+
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:RecipeListViewModel}},
+                                                              Path=RecipeSelectedCommand}"
+                                                  CommandParameter="{Binding .}"/>
+                        </Grid.GestureRecognizers>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+     
+        <ActivityIndicator IsRunning="{Binding IsBusy}"
+                           IsVisible="{Binding IsBusy}"
+                           VerticalOptions="Center"
+                           HorizontalOptions="Center" />
+    </Grid>
+</ContentPage>
